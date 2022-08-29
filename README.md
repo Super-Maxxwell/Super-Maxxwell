@@ -5,7 +5,7 @@
 - 📫 How to reach me ...
 
 //BuildXml
-
+public void note{
 
 public class buildXml {
 	//Doc
@@ -154,3 +154,4 @@ public class q2 {
 	
 	}
 
+}

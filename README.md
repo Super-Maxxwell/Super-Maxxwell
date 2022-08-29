@@ -4,12 +4,11 @@
 - 💞️ I’m looking to collaborate on ...
 - 📫 How to reach me ...
 
-<!---XML
---->
+//BuildXml
 
 public class buildXml {
 	
-	//Doc
+	<!--Doc-->
 	public static Document buildDocument( ) throws ParserConfigurationException {
 		return DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 	}
@@ -33,6 +32,42 @@ public class buildXml {
 		element.setAttributeNode(attribute);
 		return element;
 	}
+	
+	//Text nodes for elemnt
+	public static Element appendTextNode(Document doc,Element element,String textnode) {
+		element.appendChild(doc.createTextNode(textnode));
+		return element;
+	}
+	//Transform
+	public static void transformToXml(Document doc) throws TransformerFactoryConfigurationError, TransformerException {
+		Transformer transformer= TransformerFactory.newInstance().newTransformer();
+		DOMSource source = new DOMSource();
+		transformer.transform(source, new StreamResult(new File("Students.xml")));
+		
+		transformer.transform(source, new StreamResult(System.out));
+		
+	}
+	
+	
+	
+	public static void main(String[] args) throws ParserConfigurationException, TransformerFactoryConfigurationError, TransformerException {
+		// TODO Auto-generated method stub
+		
+		Document doc = buildDocument();
+
+		Element Employee = setAttributeForElement(createElement(doc, "Employee"),
+				createAttribute(doc, "Gender", "Male"));
+
+		Employee.appendChild((Node) appendTextNode(doc,
+				setAttributeForElement(createElement(doc, "Name"), createAttribute(doc, "Initials", "S.A.")),
+				"Nalaka Dissanayake"));
+		
+		doc.appendChild(createElement(doc, "School")).appendChild(createElement(doc, "Students")).appendChild(Employee);
+		transformToXml(doc);
+	}
+
+}
+
   
   
   
